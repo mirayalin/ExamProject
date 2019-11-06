@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AspNetWebCore.Controllers.HomeController.QuestionHeaderName>
+@{
+    ViewData["Title"] = "ListOfQuestions";
+}
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Sıra</th>
+            <th scope="col">Test Adı</th>
+            <th scope="col">Tarih</th>
+            <th scope="col">Sil</th>
+            <th scope="col">Sınavı Tamamla</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.HeaderName</td>
+                <td>@item.Tarih</td>
+                <td>
+                    <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.Id">
+                        Sil
+                    </a>
+                    </td>
+                <td>
+                    <a asp-action="SorulariTamamla" asp-controller="Home" asp-route-id="@item.Id">
+                        Sınavı Tamamla
+                    </a>
+                    @*@Html.ActionLink("Delete", "Home", new { id = item.Id }) |
+        @Html.ActionLink("Back to List", "Index")*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

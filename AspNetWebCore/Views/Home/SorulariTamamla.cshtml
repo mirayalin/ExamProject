@@ -1,0 +1,145 @@
+﻿@model IEnumerable<AspNetWebCore.Models.Questions>
+@{
+    ViewData["Title"] = "SorulariTamamla";
+}
+
+@*@using (Html.BeginForm("RightAnswer", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {*@
+@*@Html.ValidationSummary(true)*@
+
+
+@foreach (var item in Model)
+{
+    <div class="form-row" id="@item.Id">
+        <div class="col-md-6">
+            <div class="input-group" hidden>
+                <input type="hidden" id="QuestionHeaderId" name="QuestionHeaderId" value="@item.HeaderId" />
+            </div>
+
+            <div class="form-group">
+                <label for="firstQuestion">@item.Id Soru</label>
+                @Html.TextBoxFor(x => item.Question, new { @readonly = "readonly", @class = "form-control" })
+                @*<input type="text" class="form-control" id="firstQuestion" name="firstQuestion" />*@
+
+            </div>
+            <div class="form-group">
+                <span>A=)</span><input type="button" class="form-control ASikki" id="@item.Question" name="@item.QuestionAnswerA" value="@item.QuestionAnswerA" />
+
+                @*@Html.TextBoxFor(x => item.QuestionAnswerA, new { @readonly = "readonly", @class = "form-control", @type = "button", onclick = "tiklanma(" + @item.Id + ")" })*@
+                @*<input type="text" class="form-control" id="firstAnswer" name="firstAnswer" />*@
+            </div>
+            <div class="form-group">
+                <span>B=)</span><input type="button" class="form-control BSikki" id="@item.Question" name="@item.QuestionAnswerB" value="@item.QuestionAnswerB" />
+
+                @*@Html.TextBoxFor(x => item.QuestionAnswerB, new { @readonly = "readonly", @class = "form-control", @type = "button", onclick = "tiklanma(" + @item.Id + ")" })*@
+                @*<input type="text" class="form-control" id="SecondAnswer" name="SecondAnswer" />*@
+            </div>
+            <div class="form-group">
+                <span>C=)</span><input type="button" class="form-control CSikki" id="@item.Question" name="@item.QuestionAnswerC" value="@item.QuestionAnswerC" />
+
+                @*@Html.TextBoxFor(x => item.QuestionAnswerC, new { @readonly = "readonly", @class = "form-control", @type = "button", onclick = "tiklanma(" + @item.Id + ")" })*@
+                @*<input type="text" class="form-control" id="thirdAnswer" name="thirdAnswer" />*@
+            </div>
+            <div class="form-group">
+                <span>D=)</span><input type="button" class="form-control DSikki" id="@item.Question" name="@item.QuestionAnswerD" value="@item.QuestionAnswerD" />
+
+                @*@Html.TextBoxFor(x => item.QuestionAnswerD, new { @readonly = "readonly", @class = "form-control", @type = "button", onclick = "tiklanma(" + @item.Id + ")" })*@
+                @*<input type="text" class="form-control" id="fourAnswer" name="fourAnswer" />*@
+            </div>
+        </div>
+
+    </div>
+}
+<button type="button" id="SinaviTamamla" class="btn btn-primary">Sınavı Tamamla</button>
+@*}*@
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("input[type=button]").click(function () {
+            $(this).attr("clicked", "true").css({ "background-color": "red" });
+
+
+            var $this = $(this);
+            var isRed = !$this.data("isRed");
+            $this.data("isRed", isRed);
+            $(this).css("background-color", isRed ? "#FA0000" : "");
+        });
+
+
+        $("#SinaviTamamla").click(function (e) {
+            var dd = $('#QuestionHeaderId').val();
+
+            $.get('@Url.Content("~/Home/RightAnswer?HeaderValue=")' + dd, function (ReasonCount) {
+                $.each(ReasonCount.answerQuestions, function (i, value) {
+                    var mmm = value.id;
+                    $.get('@Url.Content("~/Home/FindValueOfId?HeaderValue=")' + mmm, function (result) {
+                        if (value.question == result.answerQuestions.question) {
+                            if (value.trueAnswer == 'A') {
+                              $('#1 .ASikki').css({ "background-color": "green" });
+                            }
+                             if (value.trueAnswer == 'B') {
+                              $('#1 .ASikki').css({ "background-color": "green" });
+                            }
+                             if (value.trueAnswer == 'C') {
+                              $('#1 .ASikki').css({ "background-color": "green" });
+                            }
+                             if (value.trueAnswer == 'D') {
+                              $('#1 .ASikki').css({ "background-color": "green" });
+                           }
+                        }
+                    if (value.question==result.answerQuestions.question) {
+                       if (value.trueAnswer == 'A') {
+                           $('#2 .BSikki').css({ "background-color": "green" });
+                        }
+                         if (value.trueAnswer == 'B') {
+                           $('#2 .BSikki').css({ "background-color": "green" });
+                        }
+                         if (value.trueAnswer == 'C') {
+                           $('#2 .BSikki').css({ "background-color": "green" });
+                        }
+                         if (value.trueAnswer == 'D') {
+                           $('#2 .BSikki').css({ "background-color": "green" });
+                        }
+
+                        }
+                      if (value.question==result.answerQuestions.question) {
+                         if (value.trueAnswer == 'A') {
+                           $('#3 .CSikki').css({ "background-color": "green" });
+                         }
+                          if (value.trueAnswer == 'B') {
+                           $('#3 .CSikki').css({ "background-color": "green" });
+                          }
+                          if (value.trueAnswer == 'C') {
+                           $('#3 .CSikki').css({ "background-color": "green" });
+                          }
+                          if (value.trueAnswer == 'D') {
+                           $('#3 .CSikki').css({ "background-color": "green" });
+                         }
+                      }
+
+
+                    if (value.question == result.answerQuestions.question) {
+                        if (value.trueAnswer == 'A') {
+                            $('#4 .DSikki').css({ "background-color": "green" });
+                        }
+                        if (value.trueAnswer == 'B') {
+                            $('#4 .DSikki').css({ "background-color": "green" });
+                        }
+                        if (value.trueAnswer == 'C') {
+                            $('#4 .DSikki').css({ "background-color": "green" });
+                        }
+                        if (value.trueAnswer == 'D') {
+                            $('#4 .DSikki').css({ "background-color": "green" });
+                        }
+                    }
+
+
+                    });
+               });
+
+            });
+
+        });
+    });
+
+</script>

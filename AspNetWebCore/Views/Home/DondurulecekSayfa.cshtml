@@ -1,0 +1,210 @@
+﻿@model List<AspNetWebCore.Controllers.HomeController.RssListesi>
+
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<div>
+    <table>
+        <tr>
+            <td>Başlıklar</td>
+            <td>:</td>
+            <td class="form-control">@Html.DropDownList("SelectedListHeader", "--Kullanıcı Seçiniz--")</td>
+        </tr>
+        <tr>
+            <td>İçerik</td>
+            <td>:</td>
+            <td><label id="icerikId"></label></td>
+        </tr>
+    </table>
+</div>
+
+@using (Html.BeginForm("SaveQuestions", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <form>
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="input-group" hidden>
+                    <input type="hidden" id="QuestionHeaderId" name="QuestionHeaderId" />
+                </div>
+
+                <div class="form-group">
+                    <label for="firstQuestion">1. Soru</label>
+                    <input type="text" class="form-control" id="firstQuestion" name="firstQuestion" placeholder="ilk Sorunuzu giriniz">
+
+                </div>
+                <div class="form-group">
+                    <span>A=)</span><input type="text" class="form-control" id="firstAnswer" name="firstAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>B=)</span> <input type="text" class="form-control" id="SecondAnswer" name="SecondAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>C=)</span><input type="text" class="form-control" id="thirdAnswer" name="thirdAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>D=)</span><input type="text" class="form-control" id="fourAnswer" name="fourAnswer" />
+                </div>
+
+                <select class="form-control" id="firstQuestionAnswer" name="firstQuestionAnswer">
+                    <option>Dogru Cevabı Seçiniz</option>
+                    <option id="1">A</option>
+                    <option id="2">B</option>
+                    <option id="3">C</option>
+                    <option id="4">D</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="secondQuestion">2. Soru</label>
+                    <input type="text" class="form-control" id="secondQuestion" name="secondQuestion" placeholder="İkinci Sorunuzu giriniz">
+
+                </div>
+
+                <div class="form-group">
+                    <span>A=)</span><input type="text" class="form-control" id="fiveAnswer" name="fiveAnswer" />
+
+                </div>
+                <div class="form-group">
+                    <span>B=)</span><input type="text" class="form-control" id="sixAnswer" name="sixAnswer"/>
+
+                </div>
+
+
+                <div class="form-group">
+                    <span>C=)</span> <input type="text" class="form-control" id="sevenAnswer" name="sevenAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>D=)</span> <input type="text" class="form-control" id="eightAnswer" name="eightAnswer"/>
+                </div>
+
+                <select class="form-control" id="secondQuestionAnswer" name="secondQuestionAnswer">
+                    <option>Dogru Cevabı Seçiniz</option>
+                    <option id="5">A</option>
+                    <option id="6">B</option>
+                    <option id="7">C</option>
+                    <option id="8">D</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="thirdQuestion">3. Soru</label>
+                    <input type="text" class="form-control" id="thirdQuestion" name="thirdQuestion" placeholder="Üçüncü Sorunuzu giriniz">
+
+                </div>
+
+                <div class="form-group">
+                    <span>A=)</span><input type="text" class="form-control" id="nineAnswer" name="nineAnswer"/>
+                </div>
+                <div class="form-group">
+                    <span>B=)</span> <input type="text" class="form-control" id="tenAnswer" name="tenAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>C=)</span><input type="text" class="form-control" id="elevenAnswer" name="elevenAnswer" />
+
+                </div>
+                <div class="form-group">
+                    <span>D=)</span><input type="text" class="form-control" id="twelveAnswer" name="twelveAnswer"/>
+                </div>
+
+
+                <select class="form-control" id="thirdhQuestionAnswer" name="thirdhQuestionAnswer">
+                    <option>Dogru Cevabı Seçiniz</option>
+                    <option id="9">A</option>
+                    <option id="10">B</option>
+                    <option id="11">C</option>
+                    <option id="12">D</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="forthQuestion">4. Soru</label>
+                    <input type="text" class="form-control" id="forthQuestion" name="forthQuestion" placeholder="Dördüncü Sorunuzu giriniz">
+
+                </div>
+                <div class="form-group">
+                   <span>A=)</span> <input type="text" class="form-control" id="thirteenAnswer" name="thirteenAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>B=)</span>  <input type="text" class="form-control" id="fourteenAnswer" name="fourteenAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>C=)</span>  <input type="text" class="form-control" id="fifteenAnswer" name="fifteenAnswer" />
+                </div>
+                <div class="form-group">
+                    <span>D=)</span> <input type="text" class="form-control" id="sixteenAnswer" name="sixteenAnswer" />
+
+                </div>
+
+
+                <select class="form-control" id="fourthQuestionAnswer" name="fourthQuestionAnswer">
+                    <option>Dogru Cevabı Seçiniz</option>
+                    <option id="13">A</option>
+                    <option id="14">B</option>
+                    <option id="15">C</option>
+                    <option id="16">D</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Kayıt</button>
+    </form>
+}
+
+
+
+<script>
+    $(document).ready(function (e) {
+        $('#soruIcerikleri').hide();
+
+       $('#SelectedListHeader').change(function (e) {
+           var valueOfHeader = $("#SelectedListHeader option:selected").val();
+           $('#QuestionHeaderId').val(valueOfHeader);
+           $.post('@Url.Content("~/Home/ContentView?valueOfHeader=")' + $("#SelectedListHeader option:selected").val(), function (e) {
+               if (e.result == "OK") {
+                   $('#icerikId').append(e.content);
+                   $('#soruIcerikleri').show();
+
+               }
+                else {
+                    alert("Buraya Girdi");
+               }
+
+            });
+
+       });
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+@*<table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Sıra</th>
+                <th scope="col">Başlık</th>
+                <th scope="col">İçerik</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Text</td>
+                    <td>@item.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
